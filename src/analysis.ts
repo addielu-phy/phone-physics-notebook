@@ -78,7 +78,22 @@ export function periodByAutocorrelation(
   const a = ac[best - 1], b = ac[best], c = ac[best + 1];
   const den = a - 2 * b + c;
   const shift = den !== 0 ? 0.5 * (a - c) / den : 0;
-  const period = (best + shift) / fs;
+  const p1 = best + shift;
+  // 若有更長的資料，再找第 2、3… 個峰（約在 kP 處），以通過原點的最小平方擬合 lag_k = k·T 提高精度
+  const longAc = autocorrelation(x, Math.min(Math.floor(x.length * 0.75), Math.floor(maxPeriod * fs * 4)));
+  let num = p1, den2 = 1;
+  for (let kk = 2; (kk + 0.3) * p1 < longAc.length - 1; kk++) {
+    const lo = Math.max(1, Math.floor((kk - 0.3) * p1)), hi = Math.min(longAc.length - 2, Math.ceil((kk + 0.3) * p1));
+    let bi = lo;
+    for (let i = lo; i <= hi; i++) if (longAc[i] > longAc[bi]) bi = i;
+    if (longAc[bi] < minStrength * 0.5 || bi === lo || bi === hi) break;
+    const qa = longAc[bi - 1], qb = longAc[bi], qc = longAc[bi + 1];
+    const qd = qa - 2 * qb + qc;
+    const lag = bi + (qd !== 0 ? 0.5 * (qa - qc) / qd : 0);
+    num += kk * lag;
+    den2 += kk * kk;
+  }
+  const period = num / den2 / fs;
   if (period < minPeriod || period > maxPeriod) return null;
   return { period, strength: bestVal, fs, lags: ac.map((_, i) => i / fs), ac };
 }
