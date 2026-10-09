@@ -1,9 +1,9 @@
-import asyncio
+import asyncio, os, pathlib
 from playwright.async_api import async_playwright
-BASE='http://localhost:4173/'; OUT='test-artifacts/'
+BASE=os.environ.get('BASE','http://localhost:4173/'); OUT=os.environ.get('OUT','test-artifacts/')
 async def main():
     async with async_playwright() as p:
-        b=await p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--no-sandbox','--disable-features=WebRtcHideLocalIpsWithMdns'])
+        b=await p.chromium.launch(executable_path=os.environ.get('CHROME') or None,args=['--disable-features=WebRtcHideLocalIpsWithMdns'])
         desk=await (await b.new_context(viewport={'width':1280,'height':800})).new_page()
         errs=[]; desk.on('pageerror',lambda e: errs.append(str(e)))
         await desk.goto(BASE+'#/lab/pendulum')
