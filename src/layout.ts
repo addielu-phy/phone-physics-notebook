@@ -7,12 +7,12 @@ const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 export function header(): string {
   return `<header class="site-header">
   <a class="logo" href="#/"><span>${LOGO}</span><span><b>${SITE_NAME}</b><small>LAB NOTEBOOK · VOL.1</small></span></a>
-  <nav class="site-nav" aria-label="主選單"><a href="#/">首頁</a><a href="#/" data-scroll="exps">實驗目錄</a><a href="#/" data-scroll="how">使用方式</a><a href="#/lab/pendulum">單擺實驗</a>${themeButton()}</nav>
+  <nav class="site-nav" aria-label="主選單"><a href="#/">首頁</a><a href="#/" data-scroll="exps">實驗目錄</a><a href="#/" data-scroll="how">使用方式</a><a href="#/lab/pendulum">單擺</a><a href="#/lab/spring">彈簧</a><a href="#/lab/centripetal">向心</a><a href="#/lab/sound-spectrum">聲音頻譜</a>${themeButton()}</nav>
 </header>`;
 }
 
 export function footer(): string {
-  return `<footer class="site-footer"><span><b>${SITE_NAME}</b>　純前端・免安裝・免登入・資料不上傳伺服器</span><span>里程碑 1　·　v0.1</span></footer>`;
+  return `<footer class="site-footer"><span><b>${SITE_NAME}</b>　純前端・免安裝・免登入・資料不上傳伺服器</span><span>製作：盧政良（高雄中學物理科）　·　里程碑 2　·　v0.2</span></footer>`;
 }
 
 export function themeButton(): string {

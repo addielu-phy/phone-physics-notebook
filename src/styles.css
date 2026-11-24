@@ -17,6 +17,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{background:var(--paper-edge);overflow-x:hidden}
 body{margin:0;color:var(--text);font-family:var(--serif);font-size:17px;line-height:1.8;
   background-color:var(--paper);
@@ -203,3 +204,37 @@ table.trials{width:100%;border-collapse:collapse;font-size:15px}
   .chart-box{height:240px}.run-state{margin-left:0;width:100%}
   .trials th:nth-child(5),.trials td:nth-child(5){display:none}
 }
+
+/* ---------- 里程碑 2：新實驗台 ---------- */
+.lab-switch{margin-left:6px;font-size:13.5px}
+.lab-switch a{color:var(--ink2)}
+.lab-switch b{color:var(--red)}
+.howto{margin-bottom:20px}
+.howto summary{list-style:none;cursor:pointer}
+.howto summary::-webkit-details-marker{display:none}
+.howto summary h3::after{content:"▾ 收合";font-family:var(--hand);font-size:14px;color:var(--muted);font-weight:400;margin-left:auto}
+.howto:not([open]) summary h3::after{content:"▸ 展開"}
+.howto summary h3{margin-bottom:0}
+.howto[open] summary h3{margin-bottom:8px}
+.purpose{margin:2px 0;font-size:15.5px}
+.purpose b{color:var(--ink);font-weight:700}
+.steps{margin:6px 0 2px;padding-left:24px;font-size:15.5px;columns:2;column-gap:36px}
+.steps li{margin:2px 0;break-inside:avoid}
+.steps li::marker{color:var(--red);font-family:var(--mono);font-weight:700}
+.chart-box.small2{height:230px}
+.fit-box{margin-top:10px;font-size:15px;border-top:1px dashed var(--line2);padding-top:8px;color:var(--text)}
+.fit-eq{font-family:var(--mono);color:var(--ink)}
+.fit-res{margin-top:2px}
+.fit-box b.red,.fit-box .red{color:var(--red)}
+.hint.red{color:var(--red)}
+.range-row{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px}
+.seg{display:inline-flex;border:1.5px solid var(--ink2);border-radius:3px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink2);font-size:13.5px;padding:2px 12px;cursor:pointer;font-family:var(--mono)}
+.seg button+button{border-left:1.5px solid var(--ink2)}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.exp-btns{display:inline-flex;gap:8px;flex-wrap:wrap}
+.new-badge{font-family:var(--hand);font-size:13px;color:#fff;background:var(--red);border-radius:3px;padding:0 6px;transform:rotate(-4deg);display:inline-block;line-height:1.5}
+table.trials tbody tr[data-row],#trials tbody tr{cursor:pointer}
+table.trials.harm{margin-top:8px}
+@media (max-width:760px){.steps{columns:1}}
+@media (max-width:640px){.lab-switch{display:block;margin-left:0}.lab-head h1{font-size:26px}}
